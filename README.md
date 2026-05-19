@@ -113,7 +113,33 @@ The **Dashboard** page shows aggregate charts across all runs: PSP distribution 
 
 ---
 
-## Architecture (300-500 word writeup)
+## Grafana Dashboard
+
+Open **http://localhost:3001** and log in with `admin` / `admin`.
+
+The **LuxeCart Reconciliation** dashboard is provisioned automatically — no manual setup needed. Navigate to **Dashboards → LuxeCart Reconciliation** to open it.
+
+### What the panels show
+
+| Panel | Type | What to expect after `make seed-load` + `make reconcile` |
+|-------|------|-----------------------------------------------------------|
+| **Total Reconciliation Runs** | Stat | Increments by 1 each time you trigger a reconciliation run |
+| **Latest Match Rate (%)** | Gauge | ~83 % with the test data (83/100 transactions matched); green ≥ 90 %, yellow ≥ 70 %, red below |
+| **Settlement Records Ingested** | Stat | Total records parsed across all PSP uploads (~100 records from the 3 test files) |
+| **Parse Errors** | Stat | 0 with the provided test files; rises if a malformed file is uploaded |
+| **HTTP Request Duration (p95)** | Time series | p95 latency per endpoint — spikes during the reconciliation run (`POST /api/v1/reconciliation/run`), then settles |
+| **Transactions Imported** | Time series | Rate spike when `make seed-load` runs; flat (zero) at steady state |
+| **Settlement Records by PSP** | Bar chart | One bar per PSP (PSP A, PSP B, PSP C) showing how many records were ingested from each |
+
+### Notes
+
+- The dashboard auto-refreshes every **30 seconds**.
+- Metrics are emitted by the backend at `/metrics` and scraped by Prometheus every 15 seconds, so panels may lag up to ~45 seconds after an action.
+- If panels show "No data", trigger at least one reconciliation run first (`make reconcile`) — gauges labeled by `run_id` only appear after a run exists.
+
+---
+
+## Architecture
 
 ### Overview
 
