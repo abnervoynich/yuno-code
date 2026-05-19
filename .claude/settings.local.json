@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p backend/cmd/server backend/internal/config backend/internal/domain backend/internal/api/handlers backend/internal/api/middleware backend/internal/ingestion backend/internal/matching backend/internal/reconciliation backend/internal/repository backend/internal/metrics backend/migrations backend/testdata backend/tests/unit backend/tests/integration)",
+      "Bash(mkdir -p frontend/src/components frontend/src/pages frontend/src/api frontend/src/types frontend/src/hooks frontend/public)",
+      "Bash(mkdir -p infra/grafana/dashboards infra/grafana/provisioning/dashboards infra/grafana/provisioning/datasources infra/prometheus)",
+      "Bash(mkdir -p api .claude/agents)",
+      "Bash(go mod *)",
+      "Bash(go test *)",
+      "Bash(npm --version)",
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "Bash(npx tailwindcss *)",
+      "Bash(make dev *)",
+      "Bash(docker-compose down *)",
+      "Bash(docker-compose up *)",
+      "Bash(curl *)"
+    ]
+  }
+}

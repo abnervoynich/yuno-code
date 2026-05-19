@@ -1,0 +1,724 @@
+{
+  "report": {
+    "period": {
+      "from": "2024-12-01",
+      "to": "2024-12-07"
+    },
+    "merchant_id": "LUXECART_001",
+    "settlements": [
+      {
+        "reference": "PSPB_TXN-20241201-00002",
+        "transaction_details": {
+          "amount": {
+            "value": 750,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 19,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 731,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-01T08:42:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-06",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241201-00006",
+        "transaction_details": {
+          "amount": {
+            "value": 3400,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 85.25,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 3314.75,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-01T10:28:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-06",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241201-00009",
+        "transaction_details": {
+          "amount": {
+            "value": 275,
+            "currency": "USD"
+          },
+          "fee": {
+            "value": 6.943075,
+            "currency": "USD"
+          },
+          "net": {
+            "value": 268.056925,
+            "currency": "USD"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-01T12:12:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-06",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241201-00012",
+        "transaction_details": {
+          "amount": {
+            "value": 1800,
+            "currency": "EUR"
+          },
+          "fee": {
+            "value": 45.062962449130595,
+            "currency": "EUR"
+          },
+          "net": {
+            "value": 1754.9370375508695,
+            "currency": "EUR"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-01T14:05:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-06",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241202-00002",
+        "transaction_details": {
+          "amount": {
+            "value": 480,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 12.25,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 467.75,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-02T09:30:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-07",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241202-00005",
+        "transaction_details": {
+          "amount": {
+            "value": 2100,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 52.75,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 2047.25,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-02T11:10:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-07",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241202-00008",
+        "transaction_details": {
+          "amount": {
+            "value": 330,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 8.5,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 321.5,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-02T12:25:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-07",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241202-00011",
+        "transaction_details": {
+          "amount": {
+            "value": 175,
+            "currency": "EUR"
+          },
+          "fee": {
+            "value": 4.437962449130596,
+            "currency": "EUR"
+          },
+          "net": {
+            "value": 170.5620375508694,
+            "currency": "EUR"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-02T13:40:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-07",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241202-00012",
+        "transaction_details": {
+          "amount": {
+            "value": 500,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 22.5,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 477.5,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-02T14:05:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-07",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241203-00002",
+        "transaction_details": {
+          "amount": {
+            "value": 630,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 16,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 614,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-03T09:00:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-08",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241203-00005",
+        "transaction_details": {
+          "amount": {
+            "value": 410,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 10.5,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 399.5,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-03T10:15:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-08",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241203-00009",
+        "transaction_details": {
+          "amount": {
+            "value": 75,
+            "currency": "EUR"
+          },
+          "fee": {
+            "value": 1.9379624491305956,
+            "currency": "EUR"
+          },
+          "net": {
+            "value": 73.0620375508694,
+            "currency": "EUR"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-03T11:55:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-08",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241203-00013",
+        "transaction_details": {
+          "amount": {
+            "value": 380,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 9.75,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 370.25,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-03T13:35:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-08",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241204-00002",
+        "transaction_details": {
+          "amount": {
+            "value": 1650,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 41.5,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 1608.5,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-04T08:35:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-09",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241204-00007",
+        "transaction_details": {
+          "amount": {
+            "value": 485,
+            "currency": "USD"
+          },
+          "fee": {
+            "value": 12.193075,
+            "currency": "USD"
+          },
+          "net": {
+            "value": 472.806925,
+            "currency": "USD"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-04T10:40:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-09",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241204-00010",
+        "transaction_details": {
+          "amount": {
+            "value": 4400,
+            "currency": "USD"
+          },
+          "fee": {
+            "value": 110.068075,
+            "currency": "USD"
+          },
+          "net": {
+            "value": 4289.931925,
+            "currency": "USD"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-04T11:55:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-09",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241204-00013",
+        "transaction_details": {
+          "amount": {
+            "value": 95,
+            "currency": "EUR"
+          },
+          "fee": {
+            "value": 2.4379624491305956,
+            "currency": "EUR"
+          },
+          "net": {
+            "value": 92.5620375508694,
+            "currency": "EUR"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-04T13:10:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-09",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241205-00002",
+        "transaction_details": {
+          "amount": {
+            "value": 560,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 14.25,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 545.75,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-05T09:30:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-10",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241205-00005",
+        "transaction_details": {
+          "amount": {
+            "value": 720,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 18.25,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 701.75,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-05T11:00:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-10",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241205-00008",
+        "transaction_details": {
+          "amount": {
+            "value": 88,
+            "currency": "EUR"
+          },
+          "fee": {
+            "value": 2.2629624491305957,
+            "currency": "EUR"
+          },
+          "net": {
+            "value": 85.7370375508694,
+            "currency": "EUR"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-05T12:30:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-10",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241205-00011",
+        "transaction_details": {
+          "amount": {
+            "value": 1150,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 29,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 1121,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-05T14:00:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-10",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241205-00014",
+        "transaction_details": {
+          "amount": {
+            "value": 2600,
+            "currency": "USD"
+          },
+          "fee": {
+            "value": 65.068075,
+            "currency": "USD"
+          },
+          "net": {
+            "value": 2534.931925,
+            "currency": "USD"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-05T15:30:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-10",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241206-00003",
+        "transaction_details": {
+          "amount": {
+            "value": 320,
+            "currency": "EUR"
+          },
+          "fee": {
+            "value": 8.062962449130596,
+            "currency": "EUR"
+          },
+          "net": {
+            "value": 311.9370375508694,
+            "currency": "EUR"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-06T10:15:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-11",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241206-00005",
+        "transaction_details": {
+          "amount": {
+            "value": 490,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 12.5,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 477.5,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-06T11:15:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-11",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241206-00008",
+        "transaction_details": {
+          "amount": {
+            "value": 780,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 19.75,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 760.25,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-06T12:45:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-11",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241206-00011",
+        "transaction_details": {
+          "amount": {
+            "value": 245,
+            "currency": "EUR"
+          },
+          "fee": {
+            "value": 6.187962449130596,
+            "currency": "EUR"
+          },
+          "net": {
+            "value": 238.8120375508694,
+            "currency": "EUR"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-06T14:15:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-11",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241207-00002",
+        "transaction_details": {
+          "amount": {
+            "value": 640,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 16.25,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 623.75,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-07T08:30:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-12",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241207-00005",
+        "transaction_details": {
+          "amount": {
+            "value": 910,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 23,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 887,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-07T10:00:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-12",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241207-00008",
+        "transaction_details": {
+          "amount": {
+            "value": 530,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 13.5,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 516.5,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-07T11:30:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-12",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_TXN-20241207-00011",
+        "transaction_details": {
+          "amount": {
+            "value": 4000,
+            "currency": "USD"
+          },
+          "fee": {
+            "value": 100.068075,
+            "currency": "USD"
+          },
+          "net": {
+            "value": 3899.931925,
+            "currency": "USD"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-07T13:00:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-12",
+          "status": "COMPLETED"
+        }
+      },
+      {
+        "reference": "PSPB_GHOST-PSPB-001",
+        "transaction_details": {
+          "amount": {
+            "value": 430,
+            "currency": "AED"
+          },
+          "fee": {
+            "value": 11,
+            "currency": "AED"
+          },
+          "net": {
+            "value": 419,
+            "currency": "AED"
+          },
+          "type": "sale",
+          "processed_at": "2024-12-04T15:30:00Z"
+        },
+        "settlement_details": {
+          "date": "2024-12-09",
+          "status": "COMPLETED"
+        }
+      }
+    ]
+  }
+}

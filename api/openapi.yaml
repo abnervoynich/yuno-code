@@ -1,0 +1,532 @@
+openapi: 3.0.3
+info:
+  title: LuxeCart Settlement Reconciliation API
+  description: |
+    Multi-PSP settlement reconciliation engine for LuxeCart.
+    Ingests settlement reports from PSP A (CSV), PSP B (JSON), and PSP C (custom pipe-delimited),
+    matches against expected transactions, and detects discrepancies.
+  version: "1.0.0"
+  contact:
+    name: Yuno Challenge
+
+servers:
+  - url: http://localhost:8080
+    description: Local development
+
+tags:
+  - name: transactions
+    description: Expected transaction management
+  - name: settlements
+    description: PSP settlement report ingestion
+  - name: reconciliation
+    description: Reconciliation runs and results
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: Service healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+
+  /api/v1/transactions/bulk:
+    post:
+      tags: [transactions]
+      summary: Import expected transactions in bulk
+      description: Import a list of LuxeCart checkout transactions as the expected dataset for reconciliation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/TransactionInput"
+      responses:
+        "201":
+          description: Transactions imported
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imported:
+                    type: integer
+                    example: 100
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+  /api/v1/transactions/:
+    get:
+      tags: [transactions]
+      summary: List transactions
+      parameters:
+        - name: psp
+          in: query
+          schema:
+            type: string
+            enum: [pspa, pspb, pspc]
+        - name: from
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: List of transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Transaction"
+
+  /api/v1/settlements/upload:
+    post:
+      tags: [settlements]
+      summary: Upload a PSP settlement file
+      description: |
+        Upload a settlement report file. Supported formats:
+        - **PSP A**: CSV with columns transaction_id, transaction_date, settlement_date, gross_amount, fee_amount, net_amount, currency, status, type
+        - **PSP B**: JSON with nested report → settlements array (IDs prefixed with "PSPB_")
+        - **PSP C**: Pipe-delimited custom format (no original transaction ID mapping; uses amount+timestamp fuzzy matching)
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                psp_name:
+                  type: string
+                  enum: [pspa, pspb, pspc]
+                  description: PSP hint (if not inferable from filename)
+      responses:
+        "201":
+          description: File parsed and ingested
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  batch_id:
+                    type: string
+                    format: uuid
+                  psp_name:
+                    type: string
+                  format:
+                    type: string
+                  record_count:
+                    type: integer
+                  period_start:
+                    type: string
+                    format: date-time
+                  period_end:
+                    type: string
+                    format: date-time
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "422":
+          description: Parse error in settlement file
+
+  /api/v1/settlements/batches:
+    get:
+      tags: [settlements]
+      summary: List settlement batches
+      responses:
+        "200":
+          description: List of settlement batches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SettlementBatch"
+
+  /api/v1/settlements/batches/{id}/records:
+    get:
+      tags: [settlements]
+      summary: List records in a settlement batch
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Settlement records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SettlementRecord"
+
+  /api/v1/reconciliation/run:
+    post:
+      tags: [reconciliation]
+      summary: Start a reconciliation run
+      description: |
+        Reconciles all expected transactions in the given date range against all ingested
+        settlement records. Returns a completed run with match counts and discrepancy totals.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [period_start, period_end]
+              properties:
+                name:
+                  type: string
+                  example: "December 2024 Full Week"
+                period_start:
+                  type: string
+                  format: date
+                  example: "2024-12-01"
+                period_end:
+                  type: string
+                  format: date
+                  example: "2024-12-07"
+      responses:
+        "201":
+          description: Reconciliation completed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReconciliationRun"
+
+  /api/v1/reconciliation/runs:
+    get:
+      tags: [reconciliation]
+      summary: List reconciliation runs
+      responses:
+        "200":
+          description: List of runs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReconciliationRun"
+
+  /api/v1/reconciliation/runs/{id}/summary:
+    get:
+      tags: [reconciliation]
+      summary: Get reconciliation summary for a run
+      description: |
+        Returns a complete summary including PSP breakdowns, top discrepancies,
+        missing transactions, unexpected entries, amount mismatches, and fee errors.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Reconciliation summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReconciliationSummary"
+
+  /api/v1/reconciliation/runs/{id}/results:
+    get:
+      tags: [reconciliation]
+      summary: List individual match results for a run
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              [matched, fuzzy_match, missing_from_settlement, unexpected_in_settlement, amount_mismatch, fee_mismatch]
+      responses:
+        "200":
+          description: List of match results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MatchResult"
+
+components:
+  schemas:
+    TransactionInput:
+      type: object
+      required: [external_id, amount, currency, type, psp_name, created_at, expected_settle_date]
+      properties:
+        external_id:
+          type: string
+          example: "TXN-20241201-00001"
+        amount:
+          type: number
+          example: 2499.00
+        currency:
+          type: string
+          enum: [USD, AED, EUR, GBP]
+        status:
+          type: string
+          default: completed
+        type:
+          type: string
+          enum: [sale, refund, chargeback]
+        psp_name:
+          type: string
+          enum: [pspa, pspb, pspc]
+        customer_ref:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        expected_settle_date:
+          type: string
+          format: date-time
+
+    Transaction:
+      allOf:
+        - $ref: "#/components/schemas/TransactionInput"
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+
+    SettlementBatch:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        psp_name:
+          type: string
+        format:
+          type: string
+        filename:
+          type: string
+        period_start:
+          type: string
+          format: date-time
+        period_end:
+          type: string
+          format: date-time
+        total_gross:
+          type: number
+        total_fees:
+          type: number
+        total_net:
+          type: number
+        currency:
+          type: string
+        record_count:
+          type: integer
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    SettlementRecord:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        batch_id:
+          type: string
+        psp_name:
+          type: string
+        psp_transaction_ref:
+          type: string
+        original_txn_ref:
+          type: string
+        gross_amount:
+          type: number
+        fee:
+          type: number
+        net_amount:
+          type: number
+        currency:
+          type: string
+        settlement_date:
+          type: string
+          format: date-time
+        transaction_date:
+          type: string
+          format: date-time
+        status:
+          type: string
+        type:
+          type: string
+
+    ReconciliationRun:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        period_start:
+          type: string
+          format: date-time
+        period_end:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+        total_expected:
+          type: number
+          description: Total expected amount in USD
+        total_settled:
+          type: number
+          description: Total settled amount in USD
+        matched_count:
+          type: integer
+        missing_count:
+          type: integer
+        unexpected_count:
+          type: integer
+        mismatch_count:
+          type: integer
+        fee_error_count:
+          type: integer
+        match_rate:
+          type: number
+          description: Percentage of transactions successfully matched
+        discrepancy_usd:
+          type: number
+          description: Difference between expected and settled in USD
+        created_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+
+    MatchResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        reconciliation_run_id:
+          type: string
+        transaction_id:
+          type: string
+        settlement_record_id:
+          type: string
+        status:
+          type: string
+          enum: [matched, fuzzy_match, missing_from_settlement, unexpected_in_settlement, amount_mismatch, fee_mismatch]
+        confidence_score:
+          type: number
+          description: 0.0-1.0; 1.0 for exact match, lower for fuzzy
+        expected_amount:
+          type: number
+          description: Expected amount in USD
+        actual_amount:
+          type: number
+          description: Actual settled amount in USD
+        amount_diff_usd:
+          type: number
+          description: actual - expected in USD (negative = underpaid)
+        expected_fee:
+          type: number
+        actual_fee:
+          type: number
+        currency:
+          type: string
+        psp_name:
+          type: string
+        notes:
+          type: string
+
+    ReconciliationSummary:
+      type: object
+      properties:
+        run:
+          $ref: "#/components/schemas/ReconciliationRun"
+        psp_breakdowns:
+          type: array
+          items:
+            $ref: "#/components/schemas/PSPBreakdown"
+        top_discrepancies:
+          type: array
+          items:
+            $ref: "#/components/schemas/MatchResult"
+        missing_items:
+          type: array
+          items:
+            $ref: "#/components/schemas/MatchResult"
+        unexpected_items:
+          type: array
+          items:
+            $ref: "#/components/schemas/MatchResult"
+        amount_mismatches:
+          type: array
+          items:
+            $ref: "#/components/schemas/MatchResult"
+        fee_errors:
+          type: array
+          items:
+            $ref: "#/components/schemas/MatchResult"
+
+    PSPBreakdown:
+      type: object
+      properties:
+        psp_name:
+          type: string
+        total_expected:
+          type: number
+        total_settled:
+          type: number
+        matched_count:
+          type: integer
+        missing_count:
+          type: integer
+        unexpected_count:
+          type: integer
+        mismatch_count:
+          type: integer
+        match_rate:
+          type: number
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              code:
+                type: string
